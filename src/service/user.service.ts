@@ -34,6 +34,8 @@ export async function validatePassword({
     return false;
   }
 
+  console.log("user-----service----validatePassword", user);
+
   return omit(user.toJSON(), "password");
 }
 

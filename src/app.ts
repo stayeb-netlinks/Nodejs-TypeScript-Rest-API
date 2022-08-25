@@ -1,16 +1,12 @@
-import express from "express";
-import config from "config";
 import connect from "./utils/connect";
 import logger from "./utils/logger";
-import routes from "./routes";
-import { deserializeUser } from "./middleware/deserializeUser";
+import config from "config";
+import createServer from "./utils/server";
 
-const app = express();
 const port = config.get<number>("port");
-app.use(express.json());
-app.use(deserializeUser);
+const app = createServer();
+
 app.listen(port, async () => {
   logger.info("App Listening on http://localhost:1337");
   await connect();
-  routes(app);
 });
